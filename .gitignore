@@ -6,3 +6,4 @@ build/
 .expo/
 coverage/
 evidence/.archive_staging/
+.env
