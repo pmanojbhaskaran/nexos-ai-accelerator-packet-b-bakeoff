@@ -31,64 +31,27 @@ export type PacketBPorts = BakeoffCapabilityReader & {
   proofArtifact: { create: (args: { data: Record<string, unknown> }) => Promise<{ id: string }> };
 };
 
-export async function applyPacketBOperationalTransition(prisma: PacketBPorts, input: PacketBTransitionInput) {
-  await assertBakeoffDimensionCapability(prisma, input.tenantId);
-  if (!input.actorId) {
-    throw new ForbiddenException({ code: 'AUTH_REQUIRED', message: 'Authenticated actor required' });
-  }
-  if (input.priorState !== PACKET_B_PRIOR_STATE) {
-    throw new BadRequestException({ code: 'INVALID_STATE_TRANSITION', message: 'Prior state must be HUB_INBOUND_RECORDED' });
-  }
-  const pkg = await prisma.shipmentPackage.findFirst({ where: { id: input.packageId, tenantId: input.tenantId } });
-  if (!pkg) throw new NotFoundException('PACKAGE_NOT_FOUND');
-  const scan = await prisma.hubInboundScan.findFirst({ where: { tenantId: input.tenantId, barcodeValue: pkg.packageBarcode } });
-  if (!scan) {
-    throw new BadRequestException({ code: 'INVALID_STATE_TRANSITION', message: 'Hub inbound scan required before dimension transition' });
-  }
-  const existing = await prisma.packageDimensionCapture.findFirst({
-    where: { tenantId: input.tenantId, correlationId: input.idempotencyKey },
-  });
-  if (existing) {
-    return {
-      duplicate: true,
-      measurementId: existing.id,
-      priorState: PACKET_B_PRIOR_STATE,
-      resultingState: PACKET_B_RESULT_STATE,
-      billingEligible: false,
-    };
-  }
-  const record = await prisma.packageDimensionCapture.create({
-    data: {
-      tenantId: input.tenantId,
-      shipmentId: pkg.shipmentInternalId,
-      packageId: pkg.id,
-      lengthCm: input.length,
-      widthCm: input.width,
-      heightCm: input.height,
-      billingEligible: false,
-      capturedBy: input.actorId,
-      correlationId: input.idempotencyKey,
-      decision: 'PROVISIONAL',
-    },
-  });
-  await prisma.proofArtifact.create({
-    data: { tenantId: input.tenantId, entityId: record.id, capturedBy: input.actorId },
-  });
-  await prisma.shipmentAuditEvent.create({
-    data: { tenantId: input.tenantId, actorId: input.actorId, entityId: record.id, correlationId: input.idempotencyKey },
-  });
-  await prisma.domainEventRecord.create({
-    data: { tenantId: input.tenantId, correlationId: input.idempotencyKey, payload: { measurementId: record.id } },
-  });
+export async function applyPacketBOperationalTransition(
+  _prisma: PacketBPorts,
+  _input: PacketBTransitionInput,
+) {
+  /**
+   * PACKET_B_CANDIDATE_IMPLEMENTATION_REQUIRED
+   *
+   * Implement the operational transition defined by:
+   *   tests/packet-b/REQUIREMENTS.md
+   *
+   * Preserve the supplied NEXOS representative authorities and contracts.
+   * Do not introduce a second database, authentication authority,
+   * tenant authority, backend, or source of truth.
+   *
+   * Evaluator-owned tests determine acceptance.
+   */
   return {
-    duplicate: false,
-    measurementId: record.id,
-    priorState: PACKET_B_PRIOR_STATE,
-    resultingState: PACKET_B_RESULT_STATE,
-    billingEligible: false,
+    ok: false,
+    code: 'PACKET_B_IMPLEMENTATION_REQUIRED',
   };
 }
-
 export function diagnosePacketBCandidateCalls(calls: string[]) {
   if (!calls.includes('measurement') || !calls.includes('audit') || !calls.includes('domain')) {
     return { ok: false, code: 'NO_OP_CANDIDATE' };
