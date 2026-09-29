@@ -1,0 +1,27 @@
+{
+  "AUTH_FIXTURE_APPROACH": "SYNTHETIC_BAKEOFF",
+  "CAPABILITY_FIXTURE_APPROACH": "SYNTHETIC_TenantCapabilityConfig_AND_TenantRolePermission",
+  "WHY": "Pinned CapabilityGuard reads TenantCapabilityConfig from DB; no safe production seed at pinned HEAD without full product schema.",
+  "tenants": [
+    {
+      "tenantId": "TENANT_A_QA",
+      "capabilities": [
+        { "capabilityCode": "HR_EMPLOYEES", "enabled": true },
+        { "capabilityCode": "OPS_MOBILE", "enabled": true }
+      ],
+      "rolePermissions": [
+        { "roleCode": "HUB_OPERATOR", "capabilityCode": "OPS_MOBILE", "canView": true, "canCreate": true }
+      ]
+    },
+    {
+      "tenantId": "TENANT_B_QA",
+      "capabilities": [
+        { "capabilityCode": "HR_EMPLOYEES", "enabled": true },
+        { "capabilityCode": "OPS_MOBILE", "enabled": true }
+      ],
+      "rolePermissions": [
+        { "roleCode": "HUB_OPERATOR", "capabilityCode": "OPS_MOBILE", "canView": true, "canCreate": true }
+      ]
+    }
+  ]
+}

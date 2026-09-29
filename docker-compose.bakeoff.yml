@@ -1,0 +1,10 @@
+# BAKEOFF_ONLY — local qualification database only
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bakeoff
+      POSTGRES_PASSWORD: bakeoff
+      POSTGRES_DB: bakeoff_qualification
+    ports:
+      - '54329:5432'

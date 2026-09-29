@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: NEXOS Bake-off Dimensioning POC (NEW_BAKEOFF_CONTRACT_REQUIRED)
+  version: 1.0.0
+paths:
+  /api/bakeoff/v1/packages/resolve:
+    get:
+      summary: Resolve barcode to package (tenant-scoped)
+      parameters:
+        - in: header
+          name: x-tenant-id
+          required: true
+          schema: { type: string }
+        - in: query
+          name: barcode
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Package identity }
+        '404': { description: Not found (no cross-tenant leakage) }
+  /api/bakeoff/v1/packages/{packageId}/provisional-dimensions:
+    post:
+      summary: Submit provisional L/W/H with quality gate outcome
+      parameters:
+        - in: header
+          name: x-tenant-id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: measurementId; billingEligible=false by default }
+  /api/bakeoff/v1/evidence:
+    post:
+      summary: Register evidence reference for capture
+      responses:
+        '200': { description: evidenceRef }

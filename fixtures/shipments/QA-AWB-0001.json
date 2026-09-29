@@ -1,0 +1,9 @@
+{
+  "tenantCode": "TENANT_A_QA",
+  "shipmentBusinessId": "QA-AWB-0001",
+  "customerLabel": "Synthetic Customer A",
+  "packages": [
+    { "packageBarcode": "QA-AWB-0001-BX01", "label": "Synthetic Box 01" },
+    { "packageBarcode": "QA-AWB-0001-BX02", "label": "Synthetic Box 02" }
+  ]
+}

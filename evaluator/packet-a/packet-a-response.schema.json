@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "API_BOUNDARY",
+    "WEB_BOUNDARY",
+    "MOBILE_BOUNDARY",
+    "SHARED_BOUNDARY",
+    "BACKEND_AUTHORITY",
+    "TENANT_AUTHORITY",
+    "AUTH_RBAC_AUTHORITY",
+    "DATABASE_AUTHORITY",
+    "AUDIT_EVENT_AUTHORITY",
+    "OFFLINE_ARCHITECTURE",
+    "BAKEOFF_ONLY_OBJECTS",
+    "MINIMUM_CHANGE_SURFACE",
+    "AFFECTED_TESTS",
+    "ARCHITECTURAL_RISKS"
+  ],
+  "properties": {
+    "API_BOUNDARY": { "$ref": "#/$defs/conceptEvidence" },
+    "WEB_BOUNDARY": { "$ref": "#/$defs/conceptEvidence" },
+    "MOBILE_BOUNDARY": { "$ref": "#/$defs/conceptEvidence" },
+    "SHARED_BOUNDARY": { "$ref": "#/$defs/conceptEvidence" },
+    "BACKEND_AUTHORITY": { "$ref": "#/$defs/conceptEvidence" },
+    "TENANT_AUTHORITY": { "$ref": "#/$defs/conceptEvidence" },
+    "AUTH_RBAC_AUTHORITY": { "$ref": "#/$defs/conceptEvidence" },
+    "DATABASE_AUTHORITY": { "$ref": "#/$defs/conceptEvidence" },
+    "AUDIT_EVENT_AUTHORITY": { "$ref": "#/$defs/conceptEvidence" },
+    "OFFLINE_ARCHITECTURE": { "$ref": "#/$defs/conceptEvidence" },
+    "BAKEOFF_ONLY_OBJECTS": { "$ref": "#/$defs/conceptEvidence" },
+    "MINIMUM_CHANGE_SURFACE": { "$ref": "#/$defs/conceptEvidence" },
+    "AFFECTED_TESTS": { "$ref": "#/$defs/conceptEvidence" },
+    "ARCHITECTURAL_RISKS": { "$ref": "#/$defs/conceptEvidence" }
+  },
+  "$defs": {
+    "conceptEvidence": {
+      "type": "object",
+      "required": ["claim", "evidence_paths", "reason"],
+      "properties": {
+        "claim": { "type": "string", "minLength": 1 },
+        "evidence_paths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "additionalProperties": false
+}

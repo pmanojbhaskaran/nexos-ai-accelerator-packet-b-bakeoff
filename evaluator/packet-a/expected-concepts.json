@@ -1,0 +1,19 @@
+{
+  "required_concepts": [
+    "api",
+    "web",
+    "mobile",
+    "shared",
+    "backend_authority",
+    "tenant_authority",
+    "auth_rbac_authority",
+    "database_authority_bakeoff_only",
+    "audit_event_authority",
+    "offline_queue_architecture",
+    "BAKEOFF_ONLY_REPRESENTATION",
+    "no_second_backend",
+    "no_second_auth",
+    "no_second_database"
+  ],
+  "zero_modification": true
+}

@@ -1,0 +1,14 @@
+{
+  "TARGET_AUTHORITY": "PHYSICAL_PACKAGE",
+  "LEGACY_SHIPMENT_DIMENSION_MEANING": "Historical shipment-level dimensions remain historical context only.",
+  "DUPLICATE_CONCEPT_CHECK": "No duplicate competing dimension authority; package scope is canonical for capture.",
+  "CONTRACT_IMPACT": "OpenAPI and DTO fields reference packageId-scoped measurements.",
+  "IMPLEMENTATION_IMPACT": "Bakeoff dimensioning service writes PackageDimensionCapture at package scope.",
+  "AFFECTED_TESTS": ["evaluator/packet-c/service-persistence-binding.test.ts", "evaluator/packet-b/symmetric-tenant-matrix.test.ts"],
+  "MIGRATION_IMPLICATIONS": "BAKEOFF_ONLY baseline already includes package dimension tables; no production migration execution.",
+  "AUDIT_HISTORY_PRESERVATION": "Audit events append-only with entity references preserved.",
+  "ORIGINAL_EVIDENCE_PRESERVATION": "Proof artifacts and originalJson fields retained on capture records.",
+  "COMMERCIAL_TRUTH_IMPACT": "Provisional capture does not alter billed commercial truth.",
+  "BILLING_TRUTH_PROTECTION": "billingEligible remains false unless explicit governed transition is defined.",
+  "ROLLBACK_OR_CORRECTION_CONSIDERATIONS": "Corrections require override reason and new capture; no silent rewrite."
+}

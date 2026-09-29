@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "TARGET_AUTHORITY",
+    "LEGACY_SHIPMENT_DIMENSION_MEANING",
+    "DUPLICATE_CONCEPT_CHECK",
+    "CONTRACT_IMPACT",
+    "IMPLEMENTATION_IMPACT",
+    "AFFECTED_TESTS",
+    "MIGRATION_IMPLICATIONS",
+    "AUDIT_HISTORY_PRESERVATION",
+    "ORIGINAL_EVIDENCE_PRESERVATION",
+    "COMMERCIAL_TRUTH_IMPACT",
+    "BILLING_TRUTH_PROTECTION",
+    "ROLLBACK_OR_CORRECTION_CONSIDERATIONS"
+  ],
+  "properties": {
+    "TARGET_AUTHORITY": { "type": "string", "const": "PHYSICAL_PACKAGE" },
+    "LEGACY_SHIPMENT_DIMENSION_MEANING": { "type": "string", "minLength": 1 },
+    "DUPLICATE_CONCEPT_CHECK": { "type": "string", "minLength": 1 },
+    "CONTRACT_IMPACT": { "type": "string", "minLength": 1 },
+    "IMPLEMENTATION_IMPACT": { "type": "string", "minLength": 1 },
+    "AFFECTED_TESTS": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "MIGRATION_IMPLICATIONS": { "type": "string", "minLength": 1 },
+    "AUDIT_HISTORY_PRESERVATION": { "type": "string", "minLength": 1 },
+    "ORIGINAL_EVIDENCE_PRESERVATION": { "type": "string", "minLength": 1 },
+    "COMMERCIAL_TRUTH_IMPACT": { "type": "string", "minLength": 1 },
+    "BILLING_TRUTH_PROTECTION": { "type": "string", "minLength": 1 },
+    "ROLLBACK_OR_CORRECTION_CONSIDERATIONS": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

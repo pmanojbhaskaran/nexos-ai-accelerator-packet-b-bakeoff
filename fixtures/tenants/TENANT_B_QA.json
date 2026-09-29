@@ -1,0 +1,13 @@
+{
+  "tenantCode": "TENANT_B_QA",
+  "label": "Synthetic Tenant B (qualification only)",
+  "users": [
+    {
+      "userCode": "USER_B_HUB",
+      "authSubject": "auth|TENANT_B_QA|USER_B_HUB",
+      "displayName": "Synthetic Hub Operator B",
+      "email": "user.b.hub@example.invalid",
+      "roleCodes": ["HUB_OPERATOR"]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+packages:
+  - 'shared'
+  - 'api'
+  - 'web'
+  - 'mobile/mobile-app'

@@ -1,0 +1,24 @@
+﻿{
+    "extends":  "./tsconfig.json",
+    "compilerOptions":  {
+                            "declaration":  false,
+                            "noEmitOnError":  true,
+                            "rootDir":  "."
+                        },
+    "include":  [
+                    "src/**/*.ts"
+                ],
+    "exclude":  [
+                    "node_modules",
+                    "dist",
+                    "test",
+                    "**/*.spec.ts",
+                    "src/scripts/**",
+                    "src/routes/**",
+                    "src/generated/**",
+                    "src/lib/**",
+                    "apps/api/src/**",
+                    "src/prisma/**",
+                    "src/modules/masters/**"
+                ]
+}

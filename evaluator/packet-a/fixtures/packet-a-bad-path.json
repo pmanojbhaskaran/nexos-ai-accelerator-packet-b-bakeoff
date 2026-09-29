@@ -1,0 +1,100 @@
+{
+  "API_BOUNDARY": {
+    "claim": "Bakeoff API boundary is api/src with bakeoff dimensioning module.",
+    "evidence_paths": [
+      "api/src/does-not-exist.ts"
+    ],
+    "reason": "Controller defines bakeoff/v1 routes guarded by JWT."
+  },
+  "WEB_BOUNDARY": {
+    "claim": "Web boundary is web/src.",
+    "evidence_paths": [
+      "web/src/lib/organization-bootstrap.ts"
+    ],
+    "reason": "Web session/bootstrap utilities remain web-local."
+  },
+  "MOBILE_BOUNDARY": {
+    "claim": "Mobile boundary is mobile/mobile-app.",
+    "evidence_paths": [
+      "mobile/mobile-app/src/lib/offline-queue.ts"
+    ],
+    "reason": "Offline queue ownership is mobile-local."
+  },
+  "SHARED_BOUNDARY": {
+    "claim": "Shared contracts live in shared/src.",
+    "evidence_paths": [
+      "shared/src/index.ts"
+    ],
+    "reason": "Shared exports define cross-channel contracts."
+  },
+  "BACKEND_AUTHORITY": {
+    "claim": "Backend authority is Nest API + Prisma.",
+    "evidence_paths": [
+      "api/src/prisma/prisma.service.ts"
+    ],
+    "reason": "Prisma service is backend persistence authority."
+  },
+  "TENANT_AUTHORITY": {
+    "claim": "Tenant authority derives from authenticated principal.",
+    "evidence_paths": [
+      "api/src/common/bakeoff/authenticated-context.ts"
+    ],
+    "reason": "Headers are validated against JWT principal only."
+  },
+  "AUTH_RBAC_AUTHORITY": {
+    "claim": "RBAC capability enforcement is server-side.",
+    "evidence_paths": [
+      "api/src/modules/tenant-config-engine/capability.guard.ts"
+    ],
+    "reason": "CapabilityGuard enforces tenant capability and role permissions."
+  },
+  "DATABASE_AUTHORITY": {
+    "claim": "Database authority is bakeoff Prisma schema.",
+    "evidence_paths": [
+      "api/prisma/schema.prisma"
+    ],
+    "reason": "Reduced bakeoff schema defines qualification tables."
+  },
+  "AUDIT_EVENT_AUTHORITY": {
+    "claim": "Audit/domain events persist via API services.",
+    "evidence_paths": [
+      "api/src/modules/bakeoff-dimensioning/bakeoff-dimensioning.service.ts"
+    ],
+    "reason": "Service writes shipment audit and domain event records."
+  },
+  "OFFLINE_ARCHITECTURE": {
+    "claim": "Offline queue architecture is mobile offline-queue.ts.",
+    "evidence_paths": [
+      "docs/OFFLINE_ARCHITECTURE.md"
+    ],
+    "reason": "Documented queue ownership and sync triggers."
+  },
+  "BAKEOFF_ONLY_OBJECTS": {
+    "claim": "0001_bakeoff_baseline migration is BAKEOFF_ONLY not production authority.",
+    "evidence_paths": [
+      "api/prisma/migrations/0001_bakeoff_baseline/migration.sql"
+    ],
+    "reason": "Synthetic baseline migration explicitly marked bakeoff-only."
+  },
+  "MINIMUM_CHANGE_SURFACE": {
+    "claim": "Minimum change surface is bakeoff dimensioning + mobile capture seam.",
+    "evidence_paths": [
+      "api/src/modules/bakeoff-dimensioning/bakeoff-dimensioning.service.ts"
+    ],
+    "reason": "Packet C extends provisional dimension path only."
+  },
+  "AFFECTED_TESTS": {
+    "claim": "Evaluator-owned tests under evaluator/ validate acceptance.",
+    "evidence_paths": [
+      "evaluator/README.md"
+    ],
+    "reason": "Candidates must not modify evaluator-owned tests."
+  },
+  "ARCHITECTURAL_RISKS": {
+    "claim": "Risk: mock-only dimension capture bypassing persistence.",
+    "evidence_paths": [
+      "evaluator/packet-c/service-persistence-binding.test.ts"
+    ],
+    "reason": "Evaluator binds persistence calls to actual service behaviour."
+  }
+}
